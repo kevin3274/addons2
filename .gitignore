@@ -1,0 +1,7 @@
+*.zip
+*.pyc
+bin
+node_modules
+.*
+!.gitignore
+

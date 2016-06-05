@@ -1,0 +1,101 @@
+<openerp>
+  <data>
+    <!-- explicit list view definition -->
+    <!--
+    <record model="ir.ui.view" id="myaddons/auto_refresh.list">
+      <field name="name">myaddons/auto_refresh list</field>
+      <field name="model">myaddons/auto_refresh.myaddons/auto_refresh</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+        </tree>
+      </field>
+    </record>
+    -->
+
+    <!-- actions opening views on models -->
+    <!--
+    <record model="ir.actions.act_window" id="myaddons/auto_refresh.action_window">
+      <field name="name">myaddons/auto_refresh window</field>
+      <field name="res_model">myaddons/auto_refresh.myaddons/auto_refresh</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+    -->
+
+    <!-- server action to the one above -->
+    <!--
+    <record model="ir.actions.server" id="myaddons/auto_refresh.action_server">
+      <field name="name">myaddons/auto_refresh server</field>
+      <field name="model_id" ref="model_myaddons/auto_refresh_myaddons/auto_refresh"/>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": self._name,
+        }
+      </field>
+    </record>
+    -->
+
+    <!-- Top menu item -->
+    <!--
+    <menuitem name="myaddons/auto_refresh" id="myaddons/auto_refresh.menu_root"/>
+    -->
+    <!-- menu categories -->
+    <!--
+    <menuitem name="Menu 1" id="myaddons/auto_refresh.menu_1" parent="myaddons/auto_refresh.menu_root"/>
+    <menuitem name="Menu 2" id="myaddons/auto_refresh.menu_2" parent="myaddons/auto_refresh.menu_root"/>
+    -->
+    <!-- actions -->
+    <!--
+    <menuitem name="List" id="myaddons/auto_refresh.menu_1_list" parent="myaddons/auto_refresh.menu_1"
+              action="myaddons/auto_refresh.action_window"/>
+    <menuitem name="Server to list" id="myaddons/auto_refresh" parent="myaddons/auto_refresh.menu_2"
+              action="myaddons/auto_refresh.action_server"/>
+    -->
+    <record id="view_task_tree" model="ir.ui.view">
+      <field name="name">auto_refresh.task.tree</field>
+      <field name="model">auto_refresh.task</field>
+      <field name="type">tree</field>
+      <field name="priority" eval="8"/>
+      <field name="arch" type="xml">
+        <tree string="Task">
+          <field name="name"/>
+          <field name="note"/>
+          <field name="create_date"/>
+        </tree>
+      </field>
+    </record>
+
+    <record id="view_task_form" model="ir.ui.view">
+      <field name="name">auto_refresh.task.form</field>
+      <field name="model">auto_refresh.task</field>
+      <field name="type">form</field>
+      <field name="priority" eval="8"/>
+      <field name="arch" type="xml">
+        <form string="Task">
+          <field name="name"/>
+          <field name="note"/>
+          <field name="create_date"/>
+        </form>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="act_open_task_view">
+      <field name="name">Task</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">auto_refresh.task</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">refresh_list,form</field>
+      <field name="domain">[]</field>
+      <field name="context">{}</field>
+    </record>
+
+    <menuitem id="menu_task"
+              parent="base.menu_users"
+              sequence="20"
+              action="act_open_task_view"/>
+  </data>
+</openerp>
