@@ -1,0 +1,52 @@
+<openerp>
+    <data>
+        <!-- <template id="listing"> -->
+        <!--   <ul> -->
+        <!--     <li t-foreach="objects" t-as="object"> -->
+        <!--       <a t-attf-href="#{ root }/objects/#{ object.id }"> -->
+        <!--         <t t-esc="object.display_name"/> -->
+        <!--       </a> -->
+        <!--     </li> -->
+        <!--   </ul> -->
+        <!-- </template> -->
+        <!-- <template id="object"> -->
+        <!--   <h1><t t-esc="object.display_name"/></h1> -->
+        <!--   <dl> -->
+        <!--     <t t-foreach="object._fields" t-as="field"> -->
+        <!--       <dt><t t-esc="field"/></dt> -->
+        <!--       <dd><t t-esc="object[field]"/></dd> -->
+        <!--     </t> -->
+        <!--   </dl> -->
+        <!-- </template> -->
+        <template id="product_list">
+            <html>
+                <head>
+                    <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=0, width=device-width"/>
+                </head>
+                <body>
+                    <p>
+                        <span t-esc="user.name"></span>'s Product List
+                    </p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <td>ID</td>
+                                <td>Name</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="products" t-as="p">
+                                <tr>
+                                    <td t-esc="p.id"></td>
+                                    <td t-esc="p.name"></td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+
+                </body>
+            </html>
+
+        </template>
+    </data>
+</openerp>

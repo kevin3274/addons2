@@ -1,0 +1,70 @@
+<openerp>
+  <data>
+    <!-- explicit list view definition -->
+    <!--
+    <record model="ir.ui.view" id="auth_weixin.list">
+      <field name="name">auth_weixin list</field>
+      <field name="model">auth_weixin.auth_weixin</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+        </tree>
+      </field>
+    </record>
+    -->
+
+    <!-- actions opening views on models -->
+    <!--
+    <record model="ir.actions.act_window" id="auth_weixin.action_window">
+      <field name="name">auth_weixin window</field>
+      <field name="res_model">auth_weixin.auth_weixin</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+    -->
+
+    <!-- server action to the one above -->
+    <!--
+    <record model="ir.actions.server" id="auth_weixin.action_server">
+      <field name="name">auth_weixin server</field>
+      <field name="model_id" ref="model_auth_weixin_auth_weixin"/>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": self._name,
+        }
+      </field>
+    </record>
+    -->
+
+    <!-- Top menu item -->
+    <!--
+    <menuitem name="auth_weixin" id="auth_weixin.menu_root"/>
+    -->
+    <!-- menu categories -->
+    <!--
+    <menuitem name="Menu 1" id="auth_weixin.menu_1" parent="auth_weixin.menu_root"/>
+    <menuitem name="Menu 2" id="auth_weixin.menu_2" parent="auth_weixin.menu_root"/>
+    -->
+    <!-- actions -->
+    <!--
+    <menuitem name="List" id="auth_weixin.menu_1_list" parent="auth_weixin.menu_1"
+              action="auth_weixin.action_window"/>
+    <menuitem name="Server to list" id="auth_weixin" parent="auth_weixin.menu_2"
+              action="auth_weixin.action_server"/>
+    -->
+    <record id="view_oauth_provider_form" model="ir.ui.view">
+      <field name="name">auth.oauth.provider.form</field>
+      <field name="model">auth.oauth.provider</field>
+      <field name="inherit_id" ref="auth_oauth.view_oauth_provider_form"/>
+      <field name="arch" type="xml">
+        <field name="auth_endpoint" position="before">
+          <field name="weixin_qy_corp_id"/>
+          <field name="weixin_qy_secret"/>
+        </field>
+      </field>
+    </record>
+  </data>
+</openerp>

@@ -1,0 +1,16 @@
+<openerp>
+    <data>
+        <record id="view_user_root_form" model="ir.ui.view">
+            <field name="name">user.root.form</field>
+            <field name="model">res.users</field>
+            <field name="inherit_id" ref="base.view_users_form"/>
+            <field name="arch" type="xml">
+                <field name="signature" position="before">
+                    <field name="weixinid"/>
+                    <field name="weixin_uid"/>
+                    <field name="weixin_access_token"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</openerp>
