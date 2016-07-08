@@ -36,11 +36,15 @@ SERVER_ROOT = 'http://30ee1eaa.ngrok.natapp.cn'
 class OAuthController(Home):
     @http.route()
     def web_login(self, *args, **kw):
-        redirect_url = kw.get('redirect', '')
-        code_url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=%s&redirect_uri=%s' \
-                   '&response_type=code&scope=snsapi_base&state={}#wechat_redirect' % (CORPID, '%s/auth_weixin/signin?redirect=%s' % (SERVER_ROOT, redirect_url))
+        #检查是否是从微信环境请求
+        if 'MicroMessenger' in http.request.httprequest.user_agent.string:
+            redirect_url = kw.get('redirect', '')
+            code_url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=%s&redirect_uri=%s' \
+                       '&response_type=code&scope=snsapi_base&state={}#wechat_redirect' % (CORPID, '%s/auth_weixin/signin?redirect=%s' % (SERVER_ROOT, redirect_url))
 
-        return werkzeug.utils.redirect(code_url, 303)
+            return werkzeug.utils.redirect(code_url, 303)
+        else:
+            return super(OAuthController, self).web_login(*args, **kw)
 
 class WeixinAuthController(http.Controller):
 
