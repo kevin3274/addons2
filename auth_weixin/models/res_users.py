@@ -37,8 +37,11 @@ class User(models.Model):
     @api.model
     def _auth_weixin_validate(self, code):
         """ return the validation data corresponding to the access token """
+        pm = self.env['ir.config_parameter'].sudo()
+        corp_id = pm.get_param('weixin.qy.corp.id')
+        secret = pm.get_param('weixin.qy.secret')
         access_token = self._auth_weixin_rpc('https://qyapi.weixin.qq.com/cgi-bin/gettoken',
-                              corpid=CORPID, corpsecret=SECRET).get('access_token', '')
+                              corpid=corp_id, corpsecret=secret).get('access_token', '')
         _logger.debug("access_token: %s", access_token)
         user_data = self._auth_weixin_rpc('https://qyapi.weixin.qq.com/cgi-bin/user/getuserinfo',
                                           access_token=access_token, code=code)

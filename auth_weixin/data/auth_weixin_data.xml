@@ -1,0 +1,16 @@
+<openerp>
+    <data noupdate="1">
+        <record id="weixin_qy_callback_base" model="ir.config_parameter">
+            <field name="key">weixin.qy.callback.base</field>
+            <field name="value">http://0.0.0.0:8069</field>
+        </record>
+        <record id="weixin_qy_corp_id" model="ir.config_parameter">
+            <field name="key">weixin.qy.corp.id</field>
+            <field name="value">corpid</field>
+        </record>
+        <record id="weixin_qy_secret" model="ir.config_parameter">
+            <field name="key">weixin.qy.secret</field>
+            <field name="value">secret</field>
+        </record>
+    </data>
+</openerp>

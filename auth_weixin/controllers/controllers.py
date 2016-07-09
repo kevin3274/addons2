@@ -29,18 +29,19 @@ _logger = logging.getLogger(__name__)
 #             'object': obj
 #         })
 
-CORPID='wx3099249a5f18d595'
-SECRET='JsMNIGzWLFbt6ktdEJX0YTEG3rDxb9mCwfmqWdTIFrdRutrDQ2glXB-4m4nXM1Na'
-SERVER_ROOT = 'http://30ee1eaa.ngrok.natapp.cn'
-
 class OAuthController(Home):
+
     @http.route()
     def web_login(self, *args, **kw):
         #检查是否是从微信环境请求
         if 'MicroMessenger' in http.request.httprequest.user_agent.string:
+            pm = http.request.env['ir.config_parameter'].sudo()
+            corp_id = pm.get_param('weixin.qy.corp.id')
+            secret = pm.get_param('weixin.qy.secret')
+            callback_base = pm.get_param('weixin.qy.callback.base')
             redirect_url = kw.get('redirect', '')
             code_url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=%s&redirect_uri=%s' \
-                       '&response_type=code&scope=snsapi_base&state={}#wechat_redirect' % (CORPID, '%s/auth_weixin/signin?redirect=%s' % (SERVER_ROOT, redirect_url))
+                       '&response_type=code&scope=snsapi_base&state={}#wechat_redirect' % (corp_id, '%s/auth_weixin/signin?redirect=%s' % (callback_base, redirect_url))
 
             return werkzeug.utils.redirect(code_url, 303)
         else:

@@ -25,6 +25,7 @@
     # always loaded
     'data': [
         # 'security/ir.model.access.csv',
+        'data/auth_weixin_data.xml',
         'views/views.xml',
         'views/res_users_view.xml',
         'views/templates.xml',
